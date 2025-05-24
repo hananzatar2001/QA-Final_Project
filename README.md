@@ -8,22 +8,27 @@ This is an automated testing framework for [SauceDemo.com](https://www.saucedemo
       ```bash
        npm install
 2. **Install Playwright browsers**
+   ```bash
        npx playwright install
-3. **Set up environment variables**
+   ```
+4. **Set up environment variables**
 Create a .env file with the following content:
-
+```bash
 SAUCE_USERNAME=standard_user
 SAUCE_PASSWORD=secret_sauce
-
+```
 4. **Run all tests**
+   ```bash
      npx playwright test
-
-5. **View test report**
+``
+6. **View test report**
+ ```bash
      npx playwright show-report
-
+```
 
 
 Sample Test: Login
+```bash
 test.describe('Login Feature', () => {
   test('Login with valid credentials', async ({ page }) => {
     const loginPage = new LoginPage(page);
@@ -32,8 +37,11 @@ test.describe('Login Feature', () => {
     await expect(page).toHaveURL(/.*inventory.html/);
   });
 });
+```
+
 
 Sample Test: Checkout
+```bash
 test.describe('Checkout Flow', () => {
   test.beforeEach(async ({ page }) => {
     const loginPage = new LoginPage(page);
@@ -55,7 +63,7 @@ test.describe('Checkout Flow', () => {
     await expect(page.locator('.complete-header')).toHaveText('Thank you for your order!');
   });
 });
-
+```
 
 
 
