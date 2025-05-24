@@ -5,12 +5,10 @@ This is an automated testing framework for [SauceDemo.com](https://www.saucedemo
 ##  Installation & Setup
 
 1. **Install dependencies**
-```bash
-npm install
-
+      ```bash
+       npm install
 2. **Install Playwright browsers**
-npx playwright install
-
+       npx playwright install
 3. **Set up environment variables**
 Create a .env file with the following content:
 
@@ -18,10 +16,11 @@ SAUCE_USERNAME=standard_user
 SAUCE_PASSWORD=secret_sauce
 
 4. **Run all tests**
-npx playwright test
+     npx playwright test
 
 5. **View test report**
-npx playwright show-report
+     npx playwright show-report
+
 
 
 Sample Test: Login
