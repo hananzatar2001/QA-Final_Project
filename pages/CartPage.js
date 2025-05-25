@@ -12,7 +12,7 @@ exports.CartPage = class CartPage {
         if (!buttonId) throw new Error(`No remove button found for item: ${name}`);
         await this.page.locator(`[data-test="${buttonId}"]`).click();
     }
-
+//
     async proceedToCheckout() {
         await this.page.locator('[data-test="checkout"]').click();
     }

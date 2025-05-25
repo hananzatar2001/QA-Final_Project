@@ -24,7 +24,7 @@ test.describe('Cart Feature', () => {
 
   expect(items).toContain('Sauce Labs Backpack');
 });
-
+//
   test('Remove item from cart', async ({ page }) => {
     const inventoryPage = new InventoryPage(page);
     await inventoryPage.addItemToCart('Sauce Labs Backpack');

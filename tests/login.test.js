@@ -9,7 +9,7 @@ test.describe('Login Feature', () => {
         await loginPage.goto();
 
         await expect(page).toHaveURL('https://www.saucedemo.com/');
-
+//
         console.log('Using USERNAME:', process.env.USERNAME);
         console.log('Using PASSWORD:', process.env.PASSWORD);
 

@@ -13,3 +13,4 @@ test('Add item to cart', async ({ page }) => {
     const item = page.locator('.inventory_item_name');
     await expect(item).toHaveText('Sauce Labs Backpack');
 });
+//

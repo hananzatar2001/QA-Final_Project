@@ -9,7 +9,7 @@ exports.CheckoutPage = class CheckoutPage {
         await this.page.fill('[data-test="postalCode"]', zip);
         await this.page.click('[data-test="continue"]');
     }
-
+//
     async finish() {
         if (!this.page.isClosed()) {
             await this.page.click('[data-test="finish"]');
