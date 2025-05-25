@@ -20,7 +20,7 @@ SAUCE_PASSWORD=secret_sauce
 4. **Run all tests**
    ```bash
    npx playwright test
-``
+
 6. **View test report**
  ```bash
  npx playwright show-report
