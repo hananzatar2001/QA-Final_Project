@@ -1,30 +1,3 @@
-/*
-exports.InventoryPage = class InventoryPage {
-    constructor(page) {
-        this.page = page;
-        this.sortDropdown = page.locator('.product_sort_container');
-    }
-
-    async addItemToCart(itemName) {
-        const idMap = {
-            'Sauce Labs Backpack': 'add-to-cart-sauce-labs-backpack',
-            'Sauce Labs Bike Light': 'add-to-cart-sauce-labs-bike-light',
-        };
-        const buttonId = idMap[itemName];
-        if (!buttonId) throw new Error(`No add-to-cart button found for item: ${itemName}`);
-        await this.page.locator(`[data-test="${buttonId}"]`).click();
-    }
-
-    async sortBy(value) {
-        await this.sortDropdown.selectOption(value);
-    }
-
-    async goToCart() {
-        await this.page.locator('.shopping_cart_link').click();
-    }
-};*/
-// pages/InventoryPage.js
-
 class InventoryPage {
     constructor(page) {
         this.page = page;
