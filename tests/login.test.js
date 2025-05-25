@@ -8,7 +8,7 @@ test.describe('Login Feature', () => {
         const loginPage = new LoginPage(page);
         await loginPage.goto();
 
-        // تأكد من تحميل الصفحة
+        
         await expect(page).toHaveURL('https://www.saucedemo.com/');
 
         console.log('Using USERNAME:', process.env.USERNAME);
@@ -16,10 +16,10 @@ test.describe('Login Feature', () => {
 
         await loginPage.login(process.env.SAUCE_USERNAME, process.env.SAUCE_PASSWORD);
 
-        // إضافة انتظار يدوي للزر بعد تسجيل الدخول
+        
         await page.waitForSelector('.inventory_list', { timeout: 15000 });
 
-        // تحقق من التنقل
+        
         await expect(page).toHaveURL(/.*inventory.html/);
     });
 
