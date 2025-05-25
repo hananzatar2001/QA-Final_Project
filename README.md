@@ -26,46 +26,58 @@ SAUCE_PASSWORD=secret_sauce
      npx playwright show-report
 ```
 
-
-Sample Test: Login
+1. Hooks
 ```bash
-test.describe('Login Feature', () => {
-  test('Login with valid credentials', async ({ page }) => {
-    const loginPage = new LoginPage(page);
-    await loginPage.goto();
-    await loginPage.login(process.env.SAUCE_USERNAME, process.env.SAUCE_PASSWORD);
-    await expect(page).toHaveURL(/.*inventory.html/);
-  });
+test.beforeEach(async ({ page }) => {
+  const loginPage = new LoginPage(page);
+  await loginPage.goto();
+  await loginPage.login(process.env.SAUCE_USERNAME, process.env.SAUCE_PASSWORD);
+  await expect(page).toHaveURL(/.*inventory.html/);
 });
+ ```
+
+2. Page Object Model (POM)
+```bash
+exports.LoginPage = class LoginPage {
+  constructor(page) {
+    this.page = page;
+  }
+
+  async goto() {
+    await this.page.goto('https://www.saucedemo.com/');
+  }
+
+  async login(username, password) {
+    await this.page.fill('#user-name', username);
+    await this.page.fill('#password', password);
+    await this.page.click('[data-test="login-button"]');
+  }
+};
 ```
 
-
-Sample Test: Checkout
 ```bash
-test.describe('Checkout Flow', () => {
-  test.beforeEach(async ({ page }) => {
-    const loginPage = new LoginPage(page);
-    await loginPage.goto();
-    await loginPage.login(process.env.SAUCE_USERNAME, process.env.SAUCE_PASSWORD);
-    await expect(page).toHaveURL(/.*inventory.html/);
-  });
+const loginPage = new LoginPage(page);
+await loginPage.goto();
+await loginPage.login(process.env.SAUCE_USERNAME, process.env.SAUCE_PASSWORD);
 
-  test('Complete checkout', async ({ page }) => {
-    const inventoryPage = new InventoryPage(page);
-    await inventoryPage.addItemToCart('Sauce Labs Bike Light');
-    await inventoryPage.goToCart();
-    await page.locator('[data-test="checkout"]').click();
-    await page.locator('[data-test="firstName"]').fill('John');
-    await page.locator('[data-test="lastName"]').fill('Doe');
-    await page.locator('[data-test="postalCode"]').fill('12345');
-    await page.locator('[data-test="continue"]').click();
-    await page.locator('[data-test="finish"]').click();
-    await expect(page.locator('.complete-header')).toHaveText('Thank you for your order!');
-  });
-});
+ ```
+
+3. Parameterized Test (.env)
+```bash
+SAUCE_USERNAME=standard_user
+SAUCE_PASSWORD=secret_sauce
 ```
+```bash
+require('dotenv').config();
+await loginPage.login(process.env.SAUCE_USERNAME, process.env.SAUCE_PASSWORD);
 
+ ```
 
+ 4. Grouping
+```bash
+test.describe('Cart Feature', () => {
+  test('Add item to cart', async ({ page }) => { ... });
+  test('Remove item from cart', async ({ page }) => { ... });
+});
 
-
-
+ ```
