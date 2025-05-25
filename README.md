@@ -11,7 +11,7 @@ This is an automated testing framework for [SauceDemo.com](https://www.saucedemo
    ```bash
    npx playwright install
    ```
-4. **Set up environment variables**
+3. **Set up environment variables**
 Create a .env file with the following content:
 ```bash
 SAUCE_USERNAME=standard_user
@@ -20,12 +20,12 @@ SAUCE_PASSWORD=secret_sauce
 4. **Run all tests**
    ```bash
    npx playwright test
-``
-6. **View test report**
+
+5. **View test report**
  ```bash
  npx playwright show-report
 ```
-
+ ** How I Used Hooks, Page Object Model, Parameterized Test (.env), and Grouping in My Code **
 1. Hooks
 ```bash
 test.beforeEach(async ({ page }) => {
