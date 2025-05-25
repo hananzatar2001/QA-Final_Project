@@ -25,7 +25,7 @@ SAUCE_PASSWORD=secret_sauce
  ```bash
  npx playwright show-report
 ```
- **How I Used Hooks, Page Object Model, Parameterized Test (.env), and Grouping in My Code**
+## How I Used Hooks, Page Object Model, Parameterized Test (.env), and Grouping in My Code
 1. Hooks
 ```bash
 test.beforeEach(async ({ page }) => {
