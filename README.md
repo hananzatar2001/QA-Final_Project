@@ -6,12 +6,12 @@ This is an automated testing framework for [SauceDemo.com](https://www.saucedemo
 
 1. **Install dependencies**
       ```bash
-       npm install
+   npm install
 2. **Install Playwright browsers**
    ```bash
-       npx playwright install
+   npx playwright install
    ```
-4. **Set up environment variables**
+3. **Set up environment variables**
 Create a .env file with the following content:
 ```bash
 SAUCE_USERNAME=standard_user
@@ -19,53 +19,65 @@ SAUCE_PASSWORD=secret_sauce
 ```
 4. **Run all tests**
    ```bash
-     npx playwright test
-``
-6. **View test report**
+   npx playwright test
+
+5. **View test report**
  ```bash
-     npx playwright show-report
+ npx playwright show-report
 ```
-
-
-Sample Test: Login
+## How I Used Hooks, Page Object Model, Parameterized Test (.env), and Grouping in My Code
+1. Hooks
 ```bash
-test.describe('Login Feature', () => {
-  test('Login with valid credentials', async ({ page }) => {
-    const loginPage = new LoginPage(page);
-    await loginPage.goto();
-    await loginPage.login(process.env.SAUCE_USERNAME, process.env.SAUCE_PASSWORD);
-    await expect(page).toHaveURL(/.*inventory.html/);
-  });
+test.beforeEach(async ({ page }) => {
+  const loginPage = new LoginPage(page);
+  await loginPage.goto();
+  await loginPage.login(process.env.SAUCE_USERNAME, process.env.SAUCE_PASSWORD);
+  await expect(page).toHaveURL(/.*inventory.html/);
 });
-```
+ ```
 
-
-Sample Test: Checkout
+2. Page Object Model (POM)
 ```bash
-test.describe('Checkout Flow', () => {
-  test.beforeEach(async ({ page }) => {
-    const loginPage = new LoginPage(page);
-    await loginPage.goto();
-    await loginPage.login(process.env.SAUCE_USERNAME, process.env.SAUCE_PASSWORD);
-    await expect(page).toHaveURL(/.*inventory.html/);
-  });
+exports.LoginPage = class LoginPage {
+  constructor(page) {
+    this.page = page;
+  }
 
-  test('Complete checkout', async ({ page }) => {
-    const inventoryPage = new InventoryPage(page);
-    await inventoryPage.addItemToCart('Sauce Labs Bike Light');
-    await inventoryPage.goToCart();
-    await page.locator('[data-test="checkout"]').click();
-    await page.locator('[data-test="firstName"]').fill('John');
-    await page.locator('[data-test="lastName"]').fill('Doe');
-    await page.locator('[data-test="postalCode"]').fill('12345');
-    await page.locator('[data-test="continue"]').click();
-    await page.locator('[data-test="finish"]').click();
-    await expect(page.locator('.complete-header')).toHaveText('Thank you for your order!');
-  });
-});
+  async goto() {
+    await this.page.goto('https://www.saucedemo.com/');
+  }
+
+  async login(username, password) {
+    await this.page.fill('#user-name', username);
+    await this.page.fill('#password', password);
+    await this.page.click('[data-test="login-button"]');
+  }
+};
 ```
 
+```bash
+const loginPage = new LoginPage(page);
+await loginPage.goto();
+await loginPage.login(process.env.SAUCE_USERNAME, process.env.SAUCE_PASSWORD);
 
+ ```
 
+3. Parameterized Test (.env)
+```bash
+SAUCE_USERNAME=standard_user
+SAUCE_PASSWORD=secret_sauce
+```
+```bash
+require('dotenv').config();
+await loginPage.login(process.env.SAUCE_USERNAME, process.env.SAUCE_PASSWORD);
 
+ ```
 
+ 4. Grouping
+```bash
+test.describe('Cart Feature', () => {
+  test('Add item to cart', async ({ page }) => { ... });
+  test('Remove item from cart', async ({ page }) => { ... });
+});
+
+ ```
