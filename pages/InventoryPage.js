@@ -12,7 +12,7 @@ class InventoryPage {
             'Sauce Labs Bolt T-Shirt': 'add-to-cart-sauce-labs-bolt-t-shirt',
             'Sauce Labs Onesie': 'add-to-cart-sauce-labs-onesie'
         };
-//
+
         const buttonId = idMap[itemName];
         if (!buttonId) throw new Error(`No add-to-cart button found for item: ${itemName}`);
 

@@ -12,7 +12,7 @@ test.describe('Sort Feature - SauceDemo', () => {
     await loginPage.login(process.env.SAUCE_USERNAME, process.env.SAUCE_PASSWORD);
     await expect(page).toHaveURL(/.*inventory.html/);
   });
-//
+
   test('Sort by Name (A to Z)', async ({ page }) => {
     const inventoryPage = new InventoryPage(page);
     await inventoryPage.sortBy('az');

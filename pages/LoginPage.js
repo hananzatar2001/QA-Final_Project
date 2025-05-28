@@ -1,6 +1,7 @@
 class LoginPage {
     constructor(page) {
         this.page = page;
+        // this id 
         this.usernameInput = page.locator('#user-name');
         this.passwordInput = page.locator('#password');
         this.loginButton = page.locator('#login-button');
@@ -10,7 +11,7 @@ class LoginPage {
     async goto() {
         await this.page.goto('/');
     }
-//
+
     async login(username, password) {
         await this.usernameInput.fill(username);
         await this.passwordInput.fill(password);

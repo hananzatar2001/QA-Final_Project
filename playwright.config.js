@@ -5,7 +5,7 @@ module.exports = defineConfig({
     timeout: 120000,
     use: {
         baseURL: 'https://www.saucedemo.com/',
-        headless: false,
+        headless: true,
         viewport: { width: 1280, height: 720 },
         ignoreHTTPSErrors: true,
         screenshot: 'only-on-failure',
@@ -17,4 +17,3 @@ module.exports = defineConfig({
     ],
     reporter: [['html'], ['list']],
 });
-//
